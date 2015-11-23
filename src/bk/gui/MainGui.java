@@ -32,7 +32,7 @@ public class MainGui extends javax.swing.JFrame {
      */
     private ReadFile rf;
     private WordMatch wm;
-    private NBEngMail   nb;
+    private NBEngMail nb;
     private NBVieMail nbvn;
     protected static String pathOfFile;
 
@@ -456,14 +456,13 @@ public class MainGui extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "JPG & GIF Images", "jpg", "gif", "txt", "sms");
-            chooser.setFileFilter(filter);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
             int returnVal = chooser.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 System.out.println("Bạn đã chọn thư mục có đường dẫn:  "
                         + chooser.getSelectedFile().getAbsolutePath());
-                linkSpamSet.setText(chooser.getSelectedFile().getParentFile().getAbsolutePath());
+                linkSpamSet.setText(chooser.getSelectedFile().getAbsolutePath());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -477,7 +476,7 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_loadBtnSetSpamActionPerformed
 
     private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
-       // if (nb == null)
+        // if (nb == null)
 //            nb = new NBEngMail("learning_words_2", "1", false);
 //            //double[] tmp = nb.mailClassifyTest(linkSpamSet.getText(), linkHamSet.getText());
 //            double[] tmp = nb.mailClassifyTest(Constant.DATA_TEST_NO_HTML_2[0], Constant.DATA_TEST_NO_HTML_2[1]);
@@ -486,22 +485,19 @@ public class MainGui extends javax.swing.JFrame {
 
         if ((elCheckBox.isSelected() == false) && (vnCheckBox.isSelected() == false)) {
             JOptionPane.showMessageDialog(null, "Bạn phải lựa chọn ngôn ngữ tập dữ liệu", null, WIDTH);
-        }
-        else {
-        if (elCheckBox.isSelected()) {
+        } else if (elCheckBox.isSelected()) {
             // path 1: Spam; path 2: Ham
             nb = new NBEngMail("learning_words_2", "1", false);
             double[] tmp = nb.mailClassifyTest(linkSpamSet.getText(), linkHamSet.getText());
             lbProSpam.setText(String.valueOf(tmp[0]));
             lbProHam.setText(String.valueOf(tmp[1]));
-        } else{
+        } else {
             nbvn = new NBVieMail("learning_vietnamese_words", "1", false);
             double[] tmp = nbvn.mailClassifyTest(linkSpamSet.getText(), linkHamSet.getText());
             lbProSpam.setText(String.valueOf(tmp[0]));
             lbProHam.setText(String.valueOf(tmp[1]));
             numSpam.setText(String.valueOf(tmp[2]));
             numHam.setText(String.valueOf(tmp[3]));
-        }
         }
     }//GEN-LAST:event_testButtonActionPerformed
 
@@ -529,14 +525,13 @@ public class MainGui extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "JPG & GIF Images", "jpg", "gif", "txt", "sms");
-            chooser.setFileFilter(filter);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
             int returnVal = chooser.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 System.out.println("Bạn đã chọn thư mục: "
                         + chooser.getSelectedFile().getAbsolutePath());
-                linkHamSet.setText(chooser.getSelectedFile().getParentFile().getAbsolutePath());
+                linkHamSet.setText(chooser.getSelectedFile().getAbsolutePath());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
