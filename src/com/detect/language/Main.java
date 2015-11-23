@@ -5,6 +5,13 @@
  */
 package com.detect.language;
 
+//import huanpc.learning.eng.Constant;
+//import huanpc.learning.eng.LearningWord;
+import static java.awt.SystemColor.text;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,98 +26,70 @@ import org.xml.sax.SAXException;
  */
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
-    //   ParseXML2CSV a = new ParseXML2CSV("./eldic/gcide_a.xml", "./eldic./gcide_a.csv");
-        String textvn = "Tham dự phiên họp có Ủy viên Bộ Chính trị - Trưởng Ban Tuyên giáo Trung ương Đinh Thế Huynh,, Phó Thủ tướng Chính phủ Vũ Đức Đam, lãnh đạo một số bộ, ngành Trung ương và các chuyên gia trong lĩnh vực giáo dục, phát triển nguồn nhân lực.\n hình triển khai và kết quả đạt được trong việc thực hiện Nghị quyết số ";
-
-        String textel = "Militants linked to Islamic State have claimed they brought the plane down.\n" ;
-//"The Metrojet Airbus 321, bound for St Petersburg, crashed in Egypt's Sinai desert just 23 minutes after take-off from Sharm el-Sheikh on Saturday.\n" +
-//"Most of those on board the plane were Russian.";
-////        Conn getconn = new Conn();
-//        Statement stm = getconn.getStatement("vietdic");
-//        //String qr = "select distinct * from vietdic limit 100";
-//
-//        //ResultSet rslt = stm.executeQuery(qr);
-//            
-//        ResultSet rslt;
-//        SplitWord li = new SplitWord();
-//        String[] exText = li.parseToArray(text);
-//        int j = 0;
-//        
-//        
-//           for (int i = 0; i < exText.length; i++) {
-//               String qr = "select distinct * from vietdic where word=\"";
-//               qr+= exText[i];
-//               qr+="\"";
-//               System.out.println(qr);
-//               rslt = stm.executeQuery(qr);
-//               System.out.println(exText[i]);
-//               rslt.last();
-//               int size = rslt.getRow();
-//               System.out.println(size);
-//                if (size!=0) {
-//                    
-//                    j++;
-//                  ;
-//                }
-//            
-//
-//        }
-//        
-
-//        for (int i = 0; i < exText.length; i++) {
-//            System.out.println(i);
-//           Resulset tmp = rslt;
-//            while (rslt.next()) {
-//                String a = rslt.getString("word");
-//                String b = exText[i];
-//                // System.out.println(a + "\n");
-//                if (a.equalsIgnoreCase(b)) {
-//                    j++;
-//                    
-//                }
-//            }
-//        }
-        //     System.out.println(exText[3].length());
-        /*   KIỂM TRA KẾt quá*/
-//            System.out.println("Từ điển : \n");
-//         while (rslt.next()) {
-//        System.out.println(rslt.getString("word")+ " \n");
-//         }
-//        System.out.println("Tập dữ liệu : \n");
-//        for (int i = 0; i < exText.length; i++) {
-//            System.out.println(exText[i]);
-//        }
-//
-//        System.out.println("Số từ đúng là :" + j);
-//
-//        WordMatch wm = new WordMatch();
-//       System.out.println(wm.getNumWordMatch(textvn, true));
-//        System.out.println(wm.getNumWordMatch(textel, true));
-////        
-//        
+    public static void main(String[] args) throws SQLException, IOException, Exception {
         
-//        Conn connMachine = new Conn();
-//        Statement stm_MachineLearning = connMachine.getStatement("machine_learning", "eldic");
-//        ResultSet rspop = connMachine.getResultSet("machine_learning", "learning_words","word");
-//       
-//                while (rspop.next()){
-//                        
-//                    String query = "insert into eldic"
-//                        +" values(\""
-//                        +rspop.getString("word")
-//                        + "\")";
-//                    stm_MachineLearning.executeQuery(query);
-//               
- //               }
-        // Kiểm tra ngôn ngữ của dữ liệu đầu vào
-                        WordMatch wm = new WordMatch();
-                        if (wm.detectVN(textvn)) {
-                            System.out.println("Ngôn ngữ Tiếng Việt");
-                        }
-                        else {
-                            System.out.println("Ngôn ngữ tiếng Anh");
-                        }
+           XMLDomBufferReader a = new XMLDomBufferReader();
+           a.DomParse("C:\\Users\\duylx\\Desktop\\test_SPAM_HTML\\1.txt", "C:\\Users\\duylx\\Desktop\\test_SPAM_HTML\\1-1.txt");
+           //a.DomParse("./test_GEN.ems", "./test_GEN_out.ems");
+//           ParseXML2CSV pr = new ParseXML2CSV();
+//           pr.parseContent("./train_GEN.ems");
+//        double tmp = 0;
+//        double a = 0;
+//        for (int i = 1 ; i < 29; i++){
+//        try (BufferedReader br = new BufferedReader(new FileReader(i+".txt"))) {
+//            StringBuilder sb = new StringBuilder();
+//            String line = br.readLine();
+//
+//            while (line != null) {
+//                sb.append(line);
+//                sb.append(System.lineSeparator());
+//                line = br.readLine();
+//            }
+//            String everything = sb.toString();
+//            WordMatch wm = new WordMatch();
+////            SplitWord splw = new SplitWord();
+////            splw.display(everything);
+//            if (wm.detectVN(everything)) {
+//             //   System.out.println("Ngôn ngữ Tiếng Việt");
+//             tmp ++;
+//            } else {
+//              //  System.out.println("Ngôn ngữ tiếng Anh");
+//              
+//            }
+//           // System.out.println("\n" + everything);
+//
+//        }
+//        }
+//        System.out.println("So email doan dung "+tmp);
 
+/*888888888888888888888888888888888*/
+
+ // Kiểm tra ngôn ngữ của dữ liệu đầu vào 700eamil
+        
+//        WordMatch wm = new WordMatch();
+//        File dir = new File(Constant.DATA_LEARN_NO_HTML_1[1]);
+//		File[] subFile = dir.listFiles();
+//		int size = subFile.length;
+//		//double numSpam = 0;
+//		double i = 0;
+//                double j = 0;
+//		for (File f : subFile) {
+//			
+//			String te = LearningWord.preprocessMail(f.getAbsolutePath());
+//            if (wm.detectVN(te)) {
+//      //         System.out.println("Ngôn ngữ Tiếng Việt");
+//                j++;
+//            }
+//            else {
+////               System.out.println("Ngôn ngữ tiếng Anh");
+//            	i++;
+//            }			
+//		}
+//		double a = i / size;
+//		System.out.println(String.valueOf(a));
+
+
+           }
+       
     }
-}
+

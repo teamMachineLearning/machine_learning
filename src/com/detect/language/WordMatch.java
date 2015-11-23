@@ -27,9 +27,9 @@ public class WordMatch {
         if (flag == true) {
             tbname = "vietdic";
         } else {
-            tbname = "learning_words";
+            tbname = "learning_words_4";
         }
-        for (int i = 0; i < words.length; i++) {
+        for (int i = 0; i < 15; i++) {
             ResultSet rstmp = conn.getWord(words[i],dbname, tbname);
             rstmp.last();
             int size = rstmp.getRow();

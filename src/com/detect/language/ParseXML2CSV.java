@@ -19,8 +19,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
-//import org.w3c.dom.Entity;
-//import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -72,24 +70,47 @@ public class ParseXML2CSV {
 //        }
 
 //    }
-    public ParseXML2CSV(String inpath, String outpath) {
+    public ParseXML2CSV() {
+    }
+
+    public void parseContent(String inpath) {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        dbFactory.setValidating(false);
         try {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
             Document doc = dBuilder.parse(inpath);
-            NodeList wordList = doc.getElementsByTagName("ent");
-            File file = new File(outpath);
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
+            //NodeList wordList = doc.getElementsByTagName("MESSAGE_BODY");
+            
+            NodeList wordList = doc.getElementsByTagName("textcontent");
+//            File file = new File("./test_GEN1.ems");
+//            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//            BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < wordList.getLength(); i++) {
+              
+                File file = new File("./data2/train_ham/email_"+i);
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
                 Node word = wordList.item(i);
+                //System.out.println("Hello " + i);
+              
+
                 if (word.getNodeType() == Node.ELEMENT_NODE) {
-                    word.getTextContent().replace("\n", " ").replaceAll("\\s", " ");
-                    bw.write(word.getTextContent());
-                    bw.write("\n");
+                
+                    String tmp = word.getTextContent().replace("\n", " ").replace('^', ' ').replaceAll("\\s", " ");
+
+                    bw.write(tmp);
+               //     fw.close();
+               //     bw.close();
+                  //  bw.newLine();
+                  bw.flush();
                 }
+
             }
+
+            //   System.out.println(wordList.item(1).getTextContent());
+            // System.out.println("Hello");
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(ParseXML2CSV.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException e) {
